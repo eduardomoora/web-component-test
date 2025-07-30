@@ -1,0 +1,44 @@
+# .github/workflows/publish.yml
+name: Publicar Web Components en GitHub Packages
+
+on:
+  push:
+    branches:
+      - main # Se activa en cada push a la rama 'main'
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # Permiso para escribir en GitHub Packages
+
+    steps:
+      - name: 1. Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: 2. Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Usa una versión LTS de Node
+          registry-url: 'https://npm.pkg.github.com' # Se autentica automáticamente con el token de la acción
+          scope: '@eduardomoora' # El scope de tu paquete
+
+      - name: 3. Instalar dependencias
+        run: npm ci # 'ci' es más rápido y seguro para workflows
+
+      - name: 4. Construir los Web Components
+        run: npm run build:elements
+
+      # Opcional: Actualizar la versión automáticamente (patch)
+      - name: 5. Actualizar la versión del paquete
+        run: npm version patch -m "Upgrade to %s para despliegue"
+
+      - name: 6. Publicar en GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Token de autenticación automático
+
+      # Opcional: Hacer push de la nueva versión a la rama main
+      - name: 7. Hacer Push de los cambios de versión
+        run: git push && git push --tags
