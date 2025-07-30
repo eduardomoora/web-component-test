@@ -1,12 +1,20 @@
 {
-  "name": "web-components",
-  "version": "0.0.0",
+  "name": "@eduardomoora/web-components",
+  "version": "0.0.1",
+  "main": "elements/web-components.js",
+  "files": [
+    "elements"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:elements": "ng build && node elements-build.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "private": true,
   "dependencies": {
@@ -14,6 +22,7 @@
     "@angular/common": "^18.2.0",
     "@angular/compiler": "^18.2.0",
     "@angular/core": "^18.2.0",
+    "@angular/elements": "^18.2.13",
     "@angular/forms": "^18.2.0",
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
@@ -27,6 +36,7 @@
     "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
+    "fs-extra": "^11.3.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

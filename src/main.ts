@@ -1,6 +1,11 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import {CustomButtonComponent} from './app/components/custom-button/custom-button.component';
+import {inject, Injector} from '@angular/core';
+import {createCustomElement} from '@angular/elements';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+(async () => {
+  await bootstrapApplication(CustomButtonComponent); // Optional bootstrap
+  const injector = inject(Injector);
+  const el = createCustomElement(CustomButtonComponent, { injector });
+  customElements.define('wc-custom-button', el);
+})();
