@@ -4,14 +4,14 @@ name: Publicar Web Components en GitHub Packages
 on:
   push:
     branches:
-      - main # Se activa en cada push a la rama 'main'
+      - main # is trigger when there is a push to the main branch
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write # Permiso para escribir en GitHub Packages
+      packages: write
 
     steps:
       - name: 1. Clonar el repositorio
@@ -20,7 +20,7 @@ jobs:
       - name: 2. Configurar Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # Usa una versión LTS de Node
+          node-version: '18'
           registry-url: 'https://npm.pkg.github.com' # Se autentica automáticamente con el token de la acción
           scope: '@eduardomoora' # El scope de tu paquete
 
