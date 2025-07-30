@@ -44,6 +44,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Token de autenticación automático
 
-      # Opcional: Hacer push de la nueva versión a la rama main
-      - name: 7. Hacer Push de los cambios de versión
-        run: git push && git push --tags
+
