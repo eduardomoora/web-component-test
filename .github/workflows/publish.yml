@@ -30,6 +30,11 @@ jobs:
       - name: 4. Construir los Web Components
         run: npm run build:elements
 
+      - name: 5. Configurar Git para el bot de Actions
+        run: |
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       # Opcional: Actualizar la versión automáticamente (patch)
       - name: 5. Actualizar la versión del paquete
         run: npm version patch -m "Upgrade to %s para despliegue"
